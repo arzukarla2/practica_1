@@ -10,7 +10,7 @@ const User = g.model('User', {
   description: g.string().length({ min: 2, max: 1000 }).optional(),
   githubUrl: g.url().optional(),
   linkedinUrl: g.url().optional(), 
-  projects: g.relation(() => Project).list().optional(),
+  projects: g.string().list().optional()
 })
 // @ts-ignore
 const Project = g.model('Project', {
@@ -20,8 +20,9 @@ const Project = g.model('Project', {
   liveSiteUrl: g.url(), 
   githubUrl: g.url(), 
   category: g.string().search(),
-  createdBy: g.relation(() => User),
+  createdBy: g.string().optional(),
 })
+//g.union('UserOrProject', { User, Project })
 export default config({
   graph: g
 })
